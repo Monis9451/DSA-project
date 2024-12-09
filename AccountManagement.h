@@ -7,7 +7,7 @@ class Account
         double balance;
         string accountType;
         string accountStatus;
-        string loanToPay;
+        bool loanToPay;
 
     public:
         //Constructors
@@ -31,7 +31,7 @@ class Account
 
         string getAccountStatus() { return accountStatus;}
 
-        string getLoanToPay() { return loanToPay;}
+        bool getLoanToPay() { return loanToPay;}
 
         //Setters
         void setAccountNumber(int accountNumber) {this->accountNumber = accountNumber;}
@@ -44,7 +44,7 @@ class Account
 
         void setAccountStatus(string accountStatus) {this->accountStatus = accountStatus;}
 
-        void setLoanToPay(string loanToPay) {this->loanToPay = loanToPay;}
+        void setLoanToPay(bool loanToPay) {this->loanToPay = loanToPay;}
 
         //Functions
         void display()
@@ -111,4 +111,37 @@ class Account
         {
             //Display loan payments
         }
+};
+
+class BST
+{
+    struct Node
+    {
+        Account account;
+        Node* left;
+        Node* right;
+    };
+
+    Node* root;
+
+    public:
+    void insertAccount(Account account)
+    {
+        //Insert account into BST
+    }
+
+    void deleteAccount(int accountNumber)
+    {
+        //Delete account from BST
+    }
+
+    Account* searchAccount(int accountNumber)
+    {
+        //Search account in BST
+    }
+
+    void displayAccounts()
+    {
+        //Display accounts in BST
+    }
 };
