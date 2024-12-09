@@ -1,116 +1,133 @@
 class Account
 {
-    private:
-        //Credentials
-        int accountNumber;
-        string holderName;
-        double balance;
-        string accountType;
-        string accountStatus;
-        bool loanToPay;
+private:
+    // Credentials
+    int accountNumber;
+    string holderName;
+    string password;
+    double balance;
+    string accountType;
+    string accountStatus;
+    bool loanToPay;
 
-    public:
-        //Constructors
-        Account(int accountNumber, string holderName, double balance, string accountType, string accountStatus)
-        {
-            this->accountNumber = accountNumber;
-            this->holderName = holderName;
-            this->balance = balance;
-            this->accountType = accountType;
-            this->accountStatus = accountStatus;
-        }
+public:
+    // Constructors
+    Account()
+    {
+        accountNumber = 0;
+        holderName = "";
+        password = "";
+        balance = 0;
+        accountType = "";
+        accountStatus = "";
+        loanToPay = false;
+    }
+    Account(int accountNumber, string holderName, string password, double balance, string accountType, string accountStatus)
+    {
+        this->accountNumber = accountNumber;
+        this->holderName = holderName;
+        this->password = password;
+        this->balance = balance;
+        this->accountType = accountType;
+        this->accountStatus = accountStatus;
+    }
 
-        //Gettters
-        int getAccountNumber() { return accountNumber;}
+    // Gettters
+    int getAccountNumber() { return accountNumber; }
 
-        string getHolderName() { return holderName;}
+    string getHolderName() { return holderName; }
 
-        double getBalance() { return balance;}
+    string getPassword() { return password; }
 
-        string getAccountType() { return accountType;}
+    double getBalance() { return balance; }
 
-        string getAccountStatus() { return accountStatus;}
+    string getAccountType() { return accountType; }
 
-        bool getLoanToPay() { return loanToPay;}
+    string getAccountStatus() { return accountStatus; }
 
-        //Setters
-        void setAccountNumber(int accountNumber) {this->accountNumber = accountNumber;}
+    bool getLoanToPay() { return loanToPay; }
 
-        void setHolderName(string holderName) {this->holderName = holderName;}
+    // Setters
+    void setAccountNumber(int accountNumber) { this->accountNumber = accountNumber; }
 
-        void setBalance(double balance) {this->balance = balance;}
+    void setHolderName(string holderName) { this->holderName = holderName; }
 
-        void setAccountType(string accountType) {this->accountType = accountType;}
+    void setPassword(string password) { this->password = password; }
 
-        void setAccountStatus(string accountStatus) {this->accountStatus = accountStatus;}
+    void setBalance(double balance) { this->balance = balance; }
 
-        void setLoanToPay(bool loanToPay) {this->loanToPay = loanToPay;}
+    void setAccountType(string accountType) { this->accountType = accountType; }
 
-        //Functions
-        void display()
-        {
-            cout << "Account Number: " << accountNumber << endl;
-            cout << "Holder Name   : " << holderName << endl;
-            cout << "Balance       : " << balance << endl;
-            cout << "Account Type  : " << accountType << endl;
-            cout << "Account Status: " << accountStatus << endl;
-        }
+    void setAccountStatus(string accountStatus) { this->accountStatus = accountStatus; }
 
-        void deposit(double amount)
-        {
-            balance += amount;
-        }
+    void setLoanToPay(bool loanToPay) { this->loanToPay = loanToPay; }
 
-        void withdraw(double amount)
-        {
-            balance -= amount;
-        }
+    // Functions
+    void display()
+    {
+        cout << "Account Number: " << accountNumber << endl;
+        cout << "Holder Name   : " << holderName << endl;
+        cout << "Balance       : " << balance << endl;
+        cout << "Loan to pay   : " << loanToPay << endl;
+        cout << "Account Type  : " << accountType << endl;
+        cout << "Account Status: " << accountStatus << endl;
+    }
 
-        void transfer(Account &receiver, double amount)
-        {
-            balance -= amount;
-            receiver.balance += amount;
-        }
+    void deposit(double amount)
+    {
+        balance += amount;
+    }
 
-        void changeAccountStatus(string status)
-        {
-            accountStatus = status;
-        }
+    void withdraw(double amount)
+    {
+        balance -= amount;
+    }
 
-        void changeAccountType(string type)
-        {
-            accountType = type;
-        }
+    void transfer(Account &receiver, double amount)
+    {
+        balance -= amount;
+        receiver.balance += amount;
+    }
 
-        void changeHolderName(string name)
-        {
-            holderName = name;
-        }
+    void changeAccountStatus(string status)
+    {
+        accountStatus = status;
+    }
 
-        void closeAccount()
-        {
-            accountStatus = "Closed";
-        }
+    void changeAccountType(string type)
+    {
+        accountType = type;
+    }
 
-        void openAccount()
-        {
-            accountStatus = "Open";
-        }
+    void changeHolderName(string name)
+    {
+        holderName = name;
+    }
 
-        void displayTransactions()
-        {
-            //Display transactions
-        }
+    void closeAccount()
+    {
+        accountStatus = "Closed";
+    }
 
-        void displayLoans()
-        {
-            //Display loans
-        }
+    void openAccount()
+    {
+        accountStatus = "Open";
+    }
 
-        void displayLoanPayments()
-        {
-            //Display loan payments
-        }
+    void displayTransactions()
+    {
+        // Display transactions
+    }
+
+    void displayLoans()
+    {
+        // Display loans
+    }
+
+    void displayLoanPayments()
+    {
+        // Display loan payments
+    }
 };
 
 class BST
@@ -118,30 +135,60 @@ class BST
     struct Node
     {
         Account account;
-        Node* left;
-        Node* right;
+        Node *left;
+        Node *right;
     };
 
-    Node* root;
+    Node *root;
 
-    public:
-    void insertAccount(Account account)
+public:
+    void insertAccount(Account &account)
     {
-        //Insert account into BST
+        Node *newNode = new Node{account, nullptr, nullptr};
+
+        if (root == nullptr)
+        {
+            root = newNode;
+            return;
+        }
+
+        Node *current = root;
+
+        while (true)
+        {
+            if (account.getAccountNumber() < current->account.getAccountNumber())
+            {
+                if (current->left == nullptr)
+                {
+                    current->left = newNode;
+                    break;
+                }
+                current = current->left;
+            }
+            else
+            {
+                if (current->right == nullptr)
+                {
+                    current->right = newNode;
+                    break;
+                }
+                current = current->right;
+            }
+        }
     }
 
     void deleteAccount(int accountNumber)
     {
-        //Delete account from BST
+        // Delete account from BST
     }
 
-    Account* searchAccount(int accountNumber)
+    Account *searchAccount(int accountNumber)
     {
-        //Search account in BST
+        // Search account in BST
     }
 
     void displayAccounts()
     {
-        //Display accounts in BST
+        // Display accounts in BST
     }
 };

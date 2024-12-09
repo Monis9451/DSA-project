@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "*.ejs": "html",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "ctime": "cpp",
+        "iosfwd": "cpp"
     }
 }
