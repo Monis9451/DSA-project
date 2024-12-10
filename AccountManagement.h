@@ -182,7 +182,7 @@ public:
         // Delete account from BST
     }
 
-    Account *searchAccount(int accountNumber)
+    Account* searchAccount(int accountNumber)
     {
         // Search account in BST
     }
