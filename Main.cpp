@@ -4,11 +4,11 @@
 #include <stack>
 #include <queue>
 #include <ctime>
-#include "AccountManagement.h";
-#include "FileHandling.h";
-#include "Transaction-Processing.h";
-#include "LoanSystem.h";
-#include "FraudDetection.h";
+#include "FileHandling.h"
+// #include "AccountManagement.h"
+// #include "Transaction-Processing.h"
+// #include "LoanSystem.h"
+#include "FraudDetection.h"
 using namespace std;
 
 //global variables for admin login
@@ -30,7 +30,7 @@ void login(BST &accountTree)
     againLogin:
     cout << "Enter 'admin' to login as admin or 'user' to login as user: ";
     cin >> loggingInAs;
-    if (loggingInAs == "admin")
+    if (loggingInAs == "user")
     {
         userAccount = userLogin(accountTree, userAccount);
         if(userAccount)
@@ -38,7 +38,7 @@ void login(BST &accountTree)
             userMenu(userAccount, accountTree);
         }
     }
-    if (loggingInAs == "user")
+    if (loggingInAs == "admin")
     {
         adminLogin(accountTree);
         adminMenu(accountTree);
@@ -95,7 +95,7 @@ Account* userLogin(BST &accountTree, Account* userAccount)
     {
         int choice;
         cout << "Account not found" << endl;
-        chooseAgain:
+        chooseAgain1:
         cout << "1. Try again" << endl;
         cout << "2. Back" << endl;
         if(choice == 1)
@@ -109,7 +109,7 @@ Account* userLogin(BST &accountTree, Account* userAccount)
         else
         {
             cout << "Invalid choice" << endl;
-            goto chooseAgain;
+            goto chooseAgain1;
         }
     }
 }
@@ -153,6 +153,7 @@ void adminLogin(BST &accountTree)
 //User menu
 void userMenu(Account* userAccount, BST &accountTree)
 {
+    userAccount->display();
     int choice;
     cout << "1. Deposit" << endl;
     cout << "2. Withdraw" << endl;

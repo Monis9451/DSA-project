@@ -1,11 +1,20 @@
-#include "AccountManagement.h";
+#include "AccountManagement.h"
+#include "Transaction-Processing.h"
+#include "LoanSystem.h"
 class FileHandler
 {
 public:
-    FileHandler();
-    ~FileHandler();
+    FileHandler()
+    {
+        
+    }
 
     void saveAccountsToFile(BST &bst)
+    {
+        // Save accounts to file
+    }
+
+    void loadAccountsFromFile(BST &bst)
     {
         ifstream inFile("Data/accounts.txt");
         if (!inFile)
@@ -26,7 +35,7 @@ public:
             inFile >> dataFetching;
             account.setPassword(dataFetching);
             inFile >> dataFetching;
-            account.setBalance(stod(dataFetching));
+            account.setBalance(stoi(dataFetching));
             inFile >> dataFetching;
             account.setAccountType(dataFetching);
             inFile >> dataFetching;
@@ -38,11 +47,6 @@ public:
         }
 
         inFile.close();
-    }
-
-    void loadAccountsFromFile(BST &bst)
-    {
-        // Load accounts from file
     }
 
     void saveTransactionsToFile(Transaction t)
