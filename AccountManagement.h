@@ -1,3 +1,11 @@
+#ifndef ACCOUNTMANAGEMENT_H
+#define ACCOUNTMANAGEMENT_H
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
 class Account
 {
 private:
@@ -32,7 +40,7 @@ public:
         this->accountStatus = accountStatus;
     }
 
-    // Gettters
+    // Getters
     int getAccountNumber() { return accountNumber; }
 
     string getHolderName() { return holderName; }
@@ -142,6 +150,8 @@ class BST
     Node *root;
 
 public:
+    BST() : root(nullptr) {}
+
     void insertAccount(Account &account)
     {
         Node *newNode = new Node{account, nullptr, nullptr};
@@ -184,7 +194,25 @@ public:
 
     Account* searchAccount(int accountNumber)
     {
-        // Search account in BST
+        Node *current = root;
+
+        while (current != nullptr)
+        {
+            if (accountNumber == current->account.getAccountNumber())
+            {
+                return &current->account;
+            }
+            else if (accountNumber < current->account.getAccountNumber())
+            {
+                current = current->left;
+            }
+            else
+            {
+                current = current->right;
+            }
+        }
+
+        return nullptr;
     }
 
     void displayAccounts()
@@ -192,3 +220,5 @@ public:
         // Display accounts in BST
     }
 };
+
+#endif
